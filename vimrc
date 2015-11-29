@@ -68,6 +68,10 @@ Plugin 'https://github.com/mkitt/tabline.vim.git'
 "12- vim-markdown
 Plugin 'https://github.com/plasticboy/vim-markdown.git'
 
+"13- macvim
+Plugin 'https://github.com/jellonek/macvim.git'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -146,10 +150,21 @@ execute pathogen#helptags()
 
 " Theme settings
 colorscheme molokai
-set t_Co=256
+"colorscheme mustang
+"colorscheme antares
+"colorscheme Monokai-chris
+"colorscheme monokain
+
+"set t_Co=256
 let g:molokai_original = 1
 let g:rehash256 = 1
+"set background=dark
+
+set t_Co=256
 set background=dark
+"colorscheme molokai 
+"highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
 
 " Powerline fonts for vim-airline 
 " Remember to set encoding in xshell
@@ -157,6 +172,10 @@ let g:airline_powerline_fonts = 1
 
 " Airline theme to match
 let g:airline_theme = "molokai"
+"let g:airline_theme = "luna"
+"let g:airline_theme = "solarized"
+"let g:airline_theme = "tomorrow"
+"let g:airline_theme = "base16"
 
 " Airline tabs for open buffers -- Install tabline
 let g:airline#extensions#tabline#enabled = 1
@@ -200,7 +219,7 @@ let g:ctrlp_dotfiles = 0
 let g:ctrlp_map = '<c-f>'
 
 " Relative Line Numbers
-"set relativenumber
+set relativenumber
 
 " Always show gutter so that YCM syntax
 " error highlight doesnt move text L/R

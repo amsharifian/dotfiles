@@ -8,9 +8,15 @@ SAVEHIST=500000
 #------------------------------
 # Variables
 #------------------------------
+export PATH=/home/amiralis/Tools/libtool/bin:/home/amiralis/Tools/zsh/bin:/home/amiralis/Tools/m4/bin:/home/amiralis/Tools/tmux/bin:/home/amiralis/Tools/gwak/bin:/home/amiralis/Tools/emacs/bin:/home/amiralis/Tools/llvm/debug/Debug+Asserts/bin:/home/amiralis/Tools/llvm/build/Release+Asserts/bin:/home/amiralis/Tools/autoconf/bin:/home/amiralis/Tools/ranger/usr/local/bin:/home/amiralis/Tools/Vim/bin:/home/amiralis/Tools/lua/bin:/home/amiralis/Tools/cmake/bin:/bin:/home/amiralis/Tools/riscv/bin:/home/amiralis/Tools/gsl-2.0/bin:/home/amiralis/Tools/gperf-3.0.4/bin:/home/amiralis/Tools/sqlite-3090/bin:$HOME/bin:$PATH
 
-export PATH=/bin:${HOME}/bin:/home/amirali/Tools/Telegram:${PATH}
+export PYTHONPATH=/home/amiralis/Tools/ranger/usr/local/lib/python2.7/dist-packages
 
+export CPLUS_INCLUDE_PATH=/home/amiralis/Tools/boost/include:/usr/local/include/c++/4.8.3:/usr/local/include/c++/4.8.3/x86_64-unknown-linux-gnu
+
+export LD_LIBRARY_PATH=/home/amiralis/Tools/boost/lib:/home/amiralis/Tools/gmp/lib:/home/amiralis/Tools/mpc/lib:/home/amiralis/Tools/mpfr/lib:/home/amiralis/Tools/gwak/lib:/usr/local/lib64:/usr/local/lib:/home/amiralis/gsl-2.0/lib:/home/amiralis/Tools/readline-4.2/lib:/home/amiralis/Tools/termcap-1.3/lib:$$LD_LIBRARY_PATH
+
+#export PATH=/bin:${HOME}/bin:${PATH}
 # SLRN
 #export NNTPSERVER='news.gmane.org'
 
@@ -22,15 +28,14 @@ export DE=gnome
 #-----------------------------
 # Dircolors
 #-----------------------------
-LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
-export LS_COLORS
+#LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
+#export LS_COLORS
 
 #------------------------------
 # Font
 # -----------------------------
-#. /usr/share/zsh/site-contrib/powerline.zsh
-if [[ -r /usr/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-        source /usr/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+if [[ -r /usr/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+        source /usr/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh
     fi
 
 #------------------------------
@@ -48,6 +53,9 @@ bindkey '^[[A' up-line-or-search
 # Beginning of line also ctrl+e/a ctrl+up/down
 bindkey "^E" end-of-line
 bindkey "^A" beginning-of-line
+bindkey "^F" forward-char
+bindkey "^B" backward-char
+bindkey "^[^?" backward-kill-word
 
 # Ctrl+r history search
 bindkey "^R" history-incremental-search-backward
@@ -58,6 +66,10 @@ bindkey '^N' down-line-or-search
 
 bindkey "^[[1;5D" emacs-backward-word
 bindkey "^[[1;5C" emacs-forward-word
+
+# Add Home and End key binding
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
 
 #------------------------------
 # History
@@ -74,17 +86,13 @@ setopt share_history
 #------------------------------
 # Alias stuff
 #------------------------------
+alias sqlite='python -c "import apsw;apsw.main()"'
 alias ls="ls --color -F"
 alias ll="ls --color -lh"
 alias grep="grep --color=always"
-
-# pacman
-alias pacup='sudo pacman -Syu '
-alias pacs='pacman -Ss'
-alias pacins='sudo pacman -S'
-alias pacr='sudo pacman -Rs'
-alias pacq='pacman -Q'
-alias pacu='sudo pacman -U'
+alias tmux='tmux -2'
+alias tmuxw='tmux -2 attach -t Work'
+alias tmuxh='tmux -2 attach -t Hash'
 
 # moving in dirs
 alias ..="cd .."
@@ -301,5 +309,4 @@ setprompt () {
         PS2=$'%_>'
 }
 setprompt
-
 
