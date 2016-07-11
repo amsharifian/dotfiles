@@ -71,6 +71,8 @@ Plugin 'https://github.com/plasticboy/vim-markdown.git'
 "13- macvim
 Plugin 'https://github.com/jellonek/macvim.git'
 
+"14
+Plugin 'https://github.com/vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -195,6 +197,8 @@ autocmd VimEnter * if empty(expand("%")) | startinsert | endif
 
 " You complete me
 
+let g:ycm_global_ycm_extra_conf = "/home/amiralis/.vim/.ycm_extra_conf.py"
+
 " Vim markdown folding disabled
 let g:vim_markdown_folding_disabled=1
 
@@ -234,4 +238,4 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-map <C-O> :NERDTreeToggle<CR>
+"map <C-O> :NERDTreeToggle<CR>
