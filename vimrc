@@ -12,6 +12,7 @@
 " 10. auto-pairs
 " 11. tabline
 " 12. vim-markdown
+" 13. vim-flake8
 
 " Vundle setup scripts
 
@@ -71,8 +72,26 @@ Plugin 'https://github.com/plasticboy/vim-markdown.git'
 "13- macvim
 Plugin 'https://github.com/jellonek/macvim.git'
 
-"14
+"14- flake8
+Plugin 'https://github.com/nvie/vim-flake8.git'
+
+"15- verilog
+Plugin 'https://github.com/vhda/verilog_systemverilog.vim.git'
+
+"16- Scala
+Plugin 'derekwyatt/vim-scala'
+
 Plugin 'https://github.com/vim-airline/vim-airline-themes'
+
+"17- clang-formater
+Plugin 'https://github.com/rhysd/vim-clang-format.git'
+
+"18- cmake-syntax
+Plugin 'https://github.com/pboettch/vim-cmake-syntax'
+
+"19- quick-scope
+"Plugin 'https://github.com/unblevable/quick-scope'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -126,6 +145,7 @@ nmap <leader>w :w<CR>
 " Tab settings
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 set expandtab
 
 " Timeout to Normal mode
@@ -178,12 +198,17 @@ let g:airline_theme = "molokai"
 "let g:airline_theme = "solarized"
 "let g:airline_theme = "tomorrow"
 "let g:airline_theme = "base16"
+"let g:airline_theme = "zenburn"
 
 " Airline tabs for open buffers -- Install tabline
 let g:airline#extensions#tabline#enabled = 1
 
 " Reindent the entire file
 map <F7> mzgg=G`z<CR>
+
+" Python flake8
+autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+
 
 " Center line in Normal mode
 nmap <space> zz
@@ -196,8 +221,8 @@ nmap N Nzz
 autocmd VimEnter * if empty(expand("%")) | startinsert | endif
 
 " You complete me
-
 let g:ycm_global_ycm_extra_conf = "/home/amiralis/.vim/.ycm_extra_conf.py"
+let g:ycm_python_binary_path    = '/usr/bin/python3'
 
 " Vim markdown folding disabled
 let g:vim_markdown_folding_disabled=1
@@ -220,7 +245,7 @@ set so=7
 " CTRLP settings
 let g:ctrlp_custom_ignore ='\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
 let g:ctrlp_dotfiles = 0
-let g:ctrlp_map = '<c-f>'
+"let g:ctrlp_map = '<c-f>'
 
 " Relative Line Numbers
 set relativenumber
@@ -239,3 +264,16 @@ let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 "map <C-O> :NERDTreeToggle<CR>
+
+
+" Clang-format
+map <leader>r :ClangFormat<CR>
+"map <C-K> :pyf /p-ssd/modules/llvm-6.0.0/share/clang/clang-format.py<cr>
+"imap <C-K> <c-o>:pyf /p-ssd/modules/llvm-6.0.0/share/clang/clang-format.py<cr>
+
+"" Auto formating files
+function! Formatonsave()
+    let l:formatdiff = 1
+    "ClangFormat
+endfunction
+autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
