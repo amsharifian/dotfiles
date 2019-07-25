@@ -1,6 +1,5 @@
 " Installed scripts
-" 0. Vundle
-" 1. Pathogen
+" 0. Vundle 1. Pathogen
 " 2. LatexBox
 " 3. Colorscheme - molokai
 " 4. vim-sensible
@@ -13,7 +12,6 @@
 " 11. tabline
 " 12. vim-markdown
 " 13. vim-flake8
-
 " Vundle setup scripts
 
 filetype off
@@ -67,7 +65,9 @@ Plugin 'https://github.com/jiangmiao/auto-pairs.git'
 Plugin 'https://github.com/mkitt/tabline.vim.git'
 
 "12- vim-markdown
-Plugin 'https://github.com/plasticboy/vim-markdown.git'
+"Plugin 'https://github.com/plasticboy/vim-markdown.git'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 "13- macvim
 Plugin 'https://github.com/jellonek/macvim.git'
@@ -91,6 +91,9 @@ Plugin 'https://github.com/pboettch/vim-cmake-syntax'
 
 "19- quick-scope
 "Plugin 'https://github.com/unblevable/quick-scope'
+
+"20-ensime
+Plugin 'ensime/ensime-vim'
 
 
 " All of your Plugins must be added before the following line
@@ -166,12 +169,20 @@ set incsearch
 " Set smartcase search
 set smartcase
 
+" No highligh while searching
+set nohlsearch
+
+
+packloadall
+
 " Pathogen runtimepath management
 execute pathogen#infect()
 execute pathogen#helptags()
 
 " Theme settings
-colorscheme molokai
+"colorscheme molokai
+packadd! onedark.vim
+colorscheme onedark
 "colorscheme mustang
 "colorscheme antares
 "colorscheme Monokai-chris
@@ -193,7 +204,8 @@ highlight nonText ctermbg=NONE
 let g:airline_powerline_fonts = 1
 
 " Airline theme to match
-let g:airline_theme = "molokai"
+let g:airline_theme = "onedark"
+"let g:airline_theme = "molokai"
 "let g:airline_theme = "luna"
 "let g:airline_theme = "solarized"
 "let g:airline_theme = "tomorrow"
@@ -221,21 +233,25 @@ nmap N Nzz
 autocmd VimEnter * if empty(expand("%")) | startinsert | endif
 
 " You complete me
-let g:ycm_global_ycm_extra_conf = "/home/amiralis/.vim/.ycm_extra_conf.py"
-let g:ycm_python_binary_path    = '/usr/bin/python3'
+let g:ycm_global_ycm_extra_conf = "/Users/amirali/.vim/.ycm_extra_conf.py"
+let g:ycm_python_binary_path    = '/usr/local/bin/python3'
+
+" Map YCMDiags to F7
+nmap <F7> :YcmDiags <CR>
 
 " Vim markdown folding disabled
 let g:vim_markdown_folding_disabled=1
 
 " No Arrowkeys
-inoremap <LEFT>     <NOP>
-inoremap <RIGHT>    <NOP>
-inoremap <UP>       <NOP>
-inoremap <DOWN>     <NOP>
+"inoremap <LEFT>     <NOP>
+"inoremap <RIGHT>    <NOP>
+"inoremap <UP>       <NOP>
+"inoremap <DOWN>     <NOP>
 
 " Next and previous buffer
 nmap <C-n> :bnext<CR>
 nmap <C-m> :bprev<CR>
+nmap <leader>0 :bd<CR>
 
 " Split file, 2 columns with scroll bind
 noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
@@ -277,3 +293,29 @@ function! Formatonsave()
     "ClangFormat
 endfunction
 autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
+
+let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+
+
+""" Onedark commands
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
+
+"ensime
+autocmd BufWritePost *.scala silent :EnTypeCheck
+nnoremap <localleader>t :EnType<CR>
