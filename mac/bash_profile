@@ -1,0 +1,69 @@
+
+### Add coloring for ls
+eval $(gdircolors ~/.dircolors)
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# Aliases
+alias ls='gls --color=auto'
+alias ll='ls -al'
+alias grep='grep --color=auto'
+alias ctags='/usr/local/bin/ctags'
+#alias vim='nvim'
+
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\][\W]:\[\033[m\] "
+
+## Brew auto completion
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+if type brew 2&>/dev/null; then
+  source "$(brew --prefix)/etc/bash_completion"
+else
+  echo "run: brew install git bash-completion"
+fi
+
+#export EDITOR='nvim'
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin directories
+PATH="$HOME/bin:$HOME/.local/bin:$PATH:/Users/amirali/Library/Python/3.7/bin:/Users/amirali/Library/Python/2.7/bin"
+
+LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+source /Users/amirali/Tools/modules/init/profile.sh
+
+module load boost/1.70.0
+
+#export PATH="/Users/amirali/Tools/llvm-7.0.0/bin:$PATH"
+#export LD_LIBRARY_PATH="/Users/amirali/Tools/llvm-7.0.0/lib:${LD_LIBRARY_PATH}"
+
+#export PATH="/usr/local/opt/llvm/bin:$PATH"
+#export PATH="/Users/amirali/git/Tapir-Meta/tapir/build/bin:$PATH"
+
+##
+# Your previous /Users/amirali/.bash_profile file was backed up as /Users/amirali/.bash_profile.macports-saved_2019-04-03_at_23:31:15
+##
+
+# MacPorts Installer addition on 2019-04-03_at_23:31:15: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+# Adding z3
+export PYTHONPATH=/Users/amirali/git/z3/build/python/:${PYTHONPATH}
+export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:/Users/amirali/git/z3/build/
+
+# Adding TVM
+export TVM_HOME=/Users/amirali/git/tvm
+export PYTHONPATH=$TVM_HOME/python:$TVM_HOME/topi/python
+

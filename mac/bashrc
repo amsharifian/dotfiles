@@ -1,0 +1,62 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+#HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+#shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+#HISTSIZE=1000
+#HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+#shopt -s checkwinsize
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+#if [ -f ~/.bash_aliases ]; then
+    #. ~/.bash_aliases
+#fi
+
+
+setBackground() {  
+  osascript -e "tell application \"iTerm\"  
+    set current_terminal to (current terminal)  
+    tell current_terminal  
+      set current_session to (current session)  
+      tell current_session  
+        set background color to $1  
+      end tell  
+    end tell  
+  end tell"  
+}  
+
+# highlight
+# args: 1: size, 2: lang
+function keycode() {
+  pbpaste | \
+    highlight \
+    	--font Inconsolata \
+    	--font-size $1 \
+    	--src-lang $2 \
+    	--out-format rtf | \
+    pbcopy
+}
+
+        #--style default-light \
+        #--base16 \
+
+#vim() {
+       #(setBackground "{65025,65025,65025}" &)
+       #(exec vim $*)
+#}
+
+export PATH=/usr/local/gcc-9.2/bin:$PATH

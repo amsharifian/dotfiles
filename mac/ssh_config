@@ -1,0 +1,38 @@
+Host nml
+    HostName nml-cloud-237.cs.sfu.ca
+    User amiralis
+
+Host lab-14s
+    HostName cs-arch-14s.cmpt.sfu.ca
+    User amirali
+    Port 10473
+
+Host lab
+    HostName cs-arch-13s.cmpt.sfu.ca
+    User amirali
+
+Host newlab
+    HostName cs-arch-18s.cmpt.sfu.ca
+    User amirali
+
+Host fpga
+    HostName cs-arch-19s.cmpt.sfu.ca
+    User amirali
+
+Host fpga-s
+    HostName cs-arch-19s.cmpt.sfu.ca
+    User ocl
+
+Host dbms
+    HostName cs-dis-srv01s.cmpt.sfu.ca
+    User amiralis
+
+Host arch-14s
+ Hostname cs-arch-14s.cmpt.sfu.ca
+ User amirali
+ Port 10473
+
+Host ci-server
+  Hostname nml-cloud-36.cs.sfu.ca
+  User amiralis
+  Port 24
