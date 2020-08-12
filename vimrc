@@ -92,9 +92,8 @@ Plugin 'https://github.com/pboettch/vim-cmake-syntax'
 "19- quick-scope
 "Plugin 'https://github.com/unblevable/quick-scope'
 
-"20-ensime
-Plugin 'ensime/ensime-vim'
-
+"20- OneDark
+Plugin 'https://github.com/joshdick/onedark.vim.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -233,7 +232,7 @@ nmap N Nzz
 autocmd VimEnter * if empty(expand("%")) | startinsert | endif
 
 " You complete me
-let g:ycm_global_ycm_extra_conf = "/Users/amirali/.vim/.ycm_extra_conf.py"
+"let g:ycm_global_ycm_extra_conf = "/Users/amirali/.vim/.ycm_extra_conf.py"
 let g:ycm_python_binary_path    = '/usr/local/bin/python3'
 
 " Map YCMDiags to F7
@@ -319,3 +318,17 @@ nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 "ensime
 autocmd BufWritePost *.scala silent :EnTypeCheck
 nnoremap <localleader>t :EnType<CR>
+
+" Enable syntax highlighting for LLVM files. To use, copy
+" utils/vim/syntax/llvm.vim to ~/.vim/syntax .
+augroup filetype
+  au! BufRead,BufNewFile *.ll     set filetype=llvm
+augroup END
+
+" Enable syntax highlighting for tablegen files. To use, copy
+" utils/vim/syntax/tablegen.vim to ~/.vim/syntax .
+augroup filetype
+  au! BufRead,BufNewFile *.td     set filetype=tablegen
+augroup END
+
+
